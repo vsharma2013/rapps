@@ -26,3 +26,17 @@ spr$year = substring(spr$timestamp,1,4)
 adist <- tapply(spr$timestamp, list(spr$month, spr$year), function(x) length(x))  #time series
 
 adist[is.na(adist)] <- 0 #remove NAs
+
+
+adist <- tapply(bmw_up$timestamp, list(bmw_up$year, bmw_up$month), function(x) length(x))
+adist[is.na(adist)] <- 0
+adv <- as.vector(adist)
+
+ats <- as.ts(adv, frequency=12, start=c(2000,1))
+
+
+
+
+
+
+
