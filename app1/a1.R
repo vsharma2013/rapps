@@ -9,27 +9,24 @@ sales_prod_region  <- sales_prod_region[order(timestamp),]
 auto <- sales_prod_region[(sales_prod_region$category == 'Automobile'),]
 elec <- sales_prod_region[(sales_prod_region$category == 'Electronics'),]
 appliance <- sales_prod_region[(sales_prod_region$category == 'Applicance'),]
-cloths <- sales_prod_region[(sales_prod_region$category == 'Clothing'),]
+cloths <- sales_prod_region[(sales_prod_region$category == 'Cloths'),]
 
-bmw <- auto[(auto$brand == "BMW"),]
+rgn <- sales_prod_region[(sales_prod_region$region == 'South'),]
+state <- sales_prod_region[(sales_prod_region$state == 'UP'),]
+city <- sales_prod_region[(sales_prod_region$city == 'Jaipur'),]
 
-adist <- tapply(spr$timestamp, list(spr$category, spr$region), function(x) length(x)) #Category distribution across regions
+apple <- sales_prod_region[(sales_prod_region$brand == 'Honda'),]
 
 
-kl <- tapply(bmw$timestamp, list(bmw$region, bmw$state), function(x) length(x)) #BMW sales statewise
-kl <- tapply(bmw$timestamp, list(bmw$region, bmw$city), function(x) length(x))  #BMW sales citywise
+sub <- city
 
-spr <- sales_prod_region
-spr$month = substring(spr$timestamp,6,7)
-spr$year = substring(spr$timestamp,1,4)
+sub$month = substring(sub$timestamp,6,7)
+sub$year = substring(sub$timestamp,1,4)
 
-adist <- tapply(spr$timestamp, list(spr$month, spr$year), function(x) length(x))  #time series
+adist <- tapply(sub$timestamp, list(sub$month, sub$year), function(x) length(x))  #time series
 
 adist[is.na(adist)] <- 0 #remove NAs
 
-
-adist <- tapply(bmw_up$timestamp, list(bmw_up$month, bmw_up$year), function(x) length(x))
-adist[is.na(adist)] <- 0
 adv <- as.vector(adist)
 
 ats <- ts(adv, frequency=12, start=c(2000,1))
