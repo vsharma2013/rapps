@@ -28,11 +28,12 @@ adist <- tapply(spr$timestamp, list(spr$month, spr$year), function(x) length(x))
 adist[is.na(adist)] <- 0 #remove NAs
 
 
-adist <- tapply(bmw_up$timestamp, list(bmw_up$year, bmw_up$month), function(x) length(x))
+adist <- tapply(bmw_up$timestamp, list(bmw_up$month, bmw_up$year), function(x) length(x))
 adist[is.na(adist)] <- 0
 adv <- as.vector(adist)
 
-ats <- as.ts(adv, frequency=12, start=c(2000,1))
+ats <- ts(adv, frequency=12, start=c(2000,1))
+plot.ts(ats)
 
 
 
