@@ -8,24 +8,24 @@ execute <- function (jsonObj) {
 	values <- c();
 	outVals <- c();
 
-	for(x in o){
+	for(x in o$data){
 		keys = append(keys, as.numeric(x$key));
 		values = append(values, x$value);
 		outVals = append(outVals, 0);
 	}
 	evalSet <- c(values[1], values[2], values[3]);
-	for(i in 4:length(values)){
+	for(i in 4:(length(values)-1)){
 		evalSet = append(evalSet, values[i]);
 		fVal <- getForcastValue(c(evalSet), keys);
 		
 		min <- fVal$lower[1];
 		max <- fVal$upper[1];
-		if(values[i] < min)
+		if(values[i+1] < min)
 			outVals[i+1] = -1;
-	 	if(values[i] > max)
+	 	if(values[i+1] > max)
 		 	outVals[i+1] = 1;
-		print(keys[i]);
-		print(values[i]);
+		print(keys[i+1]);
+		print(values[i+1]);
 		print(min);
 		print(max);		
 		print('-----------------')
