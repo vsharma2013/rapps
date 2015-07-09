@@ -42,7 +42,7 @@ plot.ts(ats)
 
 
 
-cars  <- c(919, 443, 468, 844, 908, 1047, 1259, 1905)
+cars  <- c(919, 443, 468, 844)#, 908, 1047)#, 1259, 1905)
 carseries  <- ts(cars, start=c(2000))
 plot.ts(carseries)
 carmodel <- HoltWinters(carseries, gamma=FALSE, l.start=919)

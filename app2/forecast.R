@@ -13,7 +13,7 @@ execute <- function (jsonObj) {
 		values = append(values, x$value);
 		outVals = append(outVals, 0);
 	}
-	evalSet <- c(values[0], values[1], values[2], values[3]);
+	evalSet <- c(values[1], values[2], values[3]);
 	for(i in 4:length(values)){
 		evalSet = append(evalSet, values[i]);
 		fVal <- getForcastValue(c(evalSet), keys);
@@ -21,9 +21,9 @@ execute <- function (jsonObj) {
 		min <- fVal$lower[1];
 		max <- fVal$upper[1];
 		if(values[i] < min)
-			outVals[i] = -1;
+			outVals[i+1] = -1;
 	 	if(values[i] > max)
-		 	outVals[i] = 1;
+		 	outVals[i+1] = 1;
 		print(keys[i]);
 		print(values[i]);
 		print(min);
@@ -36,6 +36,7 @@ execute <- function (jsonObj) {
 }
 
 getForcastValue <- function (values, keys){
+	print(values);
 	tsrs  <- ts(values, start=c(keys[1]));
 	tModel <- HoltWinters(tsrs, gamma=FALSE, l.start=values[1]);
 	tForecast <- forecast.HoltWinters(tModel, h=1)
