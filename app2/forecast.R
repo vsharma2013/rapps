@@ -14,7 +14,7 @@ execute <- function (jsonObj) {
 		outVals = append(outVals, 0);
 	}
 	evalSet <- c(values[0], values[1], values[2], values[3]);
-	for(i in 4:8){
+	for(i in 4:length(values)){
 		evalSet = append(evalSet, values[i]);
 		fVal <- getForcastValue(c(evalSet), keys);
 		
