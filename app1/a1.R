@@ -42,10 +42,10 @@ plot.ts(ats)
 
 
 
-cars  <- c(919, 443, 468, 844)#, 908, 1047)#, 1259, 1905)
-carseries  <- ts(cars, start=c(2000))
+cars  <- c(11,5,5,2,12,5)#, 908, 1047)#, 1259, 1905) 11  5  5  2 12  5 19 14 17 24 27 18
+carseries  <- ts(cars, frequency=12, start=c(2014, 1))
 plot.ts(carseries)
-carmodel <- HoltWinters(carseries, gamma=FALSE, l.start=919)
+carmodel <- HoltWinters(carseries, gamma=FALSE, l.start=1)
 plot(carmodel)
 carforecast <- forecast.HoltWinters(carmodel, h=1)
 plot.forecast(carforecast)
